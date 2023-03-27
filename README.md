@@ -1,4 +1,4 @@
-# React-Tips-Calculator
+# React-tips-calculator
 
 This project calculates the total amount of the bill with tips.
 
