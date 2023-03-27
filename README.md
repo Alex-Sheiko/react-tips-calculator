@@ -6,7 +6,7 @@ This project calculates the total amount of the bill with tips.
 
 ## Preview
 
-![Image](https://github.com/Alex-Sheiko/react-country-list/blob/main/preview/react-tips-calculator.jpg)
+![Image](https://github.com/Alex-Sheiko/react-tips-calculator/blob/gh-pages/preview/preview.jpg)
 
 ## Used technologies and tools
 
