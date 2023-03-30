@@ -8,8 +8,8 @@ import { useInput } from '../../hooks/useInput';
 export const Form = () => {
   const bill = useInput();
   const persons = useInput();
-  const [total, setTotal] = useState(0);
-  const [tips, setTips] = useState('10');
+  const [total, setTotal] = useState('0');
+  const [tips, setTips] = useState('1.1');
   const [isDisabled, setIsDisabled] = useState(true);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -18,8 +18,7 @@ export const Form = () => {
     const billAmount = parseFloat(bill.value),
       personsNumber = parseFloat(persons.value),
       percentTips = parseFloat(tips),
-      totalBill =
-        ((billAmount * percentTips) / 100) * personsNumber + billAmount;
+      totalBill = ((billAmount * percentTips) / personsNumber).toFixed(2);
     setTotal(totalBill);
   };
 
@@ -36,7 +35,7 @@ export const Form = () => {
         <Input {...persons} type="number" placeholder="Enter persons" />
         <CustomSelect value={tips} onChange={setTips} />
       </FormControls>
-      <TotalBill>Total: {total.toFixed(2)}$</TotalBill>
+      <TotalBill>Total: {total}$</TotalBill>
       <Button isDisabled={isDisabled} />
     </StyledForm>
   );
