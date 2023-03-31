@@ -5,7 +5,6 @@ import { customStyles } from './styles';
 interface SelectProps {
   value: string;
   onChange: (value: string) => void;
-  isMulti: boolean;
 }
 
 export const CustomSelect = ({ value, onChange }: SelectProps) => {
@@ -19,9 +18,8 @@ export const CustomSelect = ({ value, onChange }: SelectProps) => {
     newValue?.value && onChange(newValue.value);
   };
 
-  const getOptionValue = (value: string): SelectOption | undefined => {
-    return value ? options.find((option) => option.value === value) : undefined;
-  };
+  const getOptionValue = (value: string): SelectOption | undefined =>
+    value ? options.find((option) => option.value === value) : undefined;
 
   return (
     <Select
@@ -29,7 +27,6 @@ export const CustomSelect = ({ value, onChange }: SelectProps) => {
       options={options}
       value={getOptionValue(value)}
       onChange={handleSelect}
-      isMulti={false}
     />
   );
 };
