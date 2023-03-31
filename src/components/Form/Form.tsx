@@ -4,8 +4,13 @@ import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import { CustomSelect } from '../CustomSelect/CustomSelect';
 import { useInput } from '../../hooks/useInput';
+import { SelectOption } from '../../types/types';
 
-export const Form = () => {
+interface FormProps {
+  options: SelectOption[];
+}
+
+export const Form = ({ options }: FormProps) => {
   const bill = useInput();
   const persons = useInput();
   const [total, setTotal] = useState('0');
@@ -33,7 +38,7 @@ export const Form = () => {
       <FormControls>
         <Input {...bill} type="number" placeholder="Enter bill" />
         <Input {...persons} type="number" placeholder="Enter persons" />
-        <CustomSelect value={tips} onChange={setTips} />
+        <CustomSelect value={tips} onChange={setTips} options={options} />
       </FormControls>
       <TotalBill>Total: {total}$</TotalBill>
       <Button isDisabled={isDisabled} />

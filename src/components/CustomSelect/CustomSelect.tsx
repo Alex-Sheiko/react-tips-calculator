@@ -5,15 +5,10 @@ import { customStyles } from './styles';
 interface SelectProps {
   value: string;
   onChange: (value: string) => void;
+  options: SelectOption[];
 }
 
-export const CustomSelect = ({ value, onChange }: SelectProps) => {
-  const options: SelectOption[] = [
-    { value: '1.1', label: '10%' },
-    { value: '1.15', label: '15%' },
-    { value: '1.2', label: '20%' },
-  ];
-
+export const CustomSelect = ({ value, onChange, options }: SelectProps) => {
   const handleSelect = (newValue: SelectOption | null) => {
     newValue?.value && onChange(newValue.value);
   };
