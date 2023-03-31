@@ -33,7 +33,7 @@ export const Form = () => {
       <FormControls>
         <Input {...bill} type="number" placeholder="Enter bill" />
         <Input {...persons} type="number" placeholder="Enter persons" />
-        <CustomSelect value={tips} onChange={setTips} />
+        <CustomSelect value={tips} onChange={setTips} isMulti={false} />
       </FormControls>
       <TotalBill>Total: {total}$</TotalBill>
       <Button isDisabled={isDisabled} />

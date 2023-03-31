@@ -1,7 +1,7 @@
 import { StylesConfig } from 'react-select';
 import { SelectOption } from '../../types/types';
 
-export const customStyles: StylesConfig<SelectOption, boolean> = {
+export const customStyles: StylesConfig<SelectOption, false> = {
   container: (base) => ({
     ...base,
     width: '100%',

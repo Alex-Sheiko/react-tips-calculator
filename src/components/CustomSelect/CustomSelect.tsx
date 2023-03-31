@@ -1,10 +1,11 @@
-import Select, { OnChangeValue } from 'react-select';
+import Select from 'react-select';
 import { SelectOption } from '../../types/types';
 import { customStyles } from './styles';
 
 interface SelectProps {
   value: string;
   onChange: (value: string) => void;
+  isMulti: boolean;
 }
 
 export const CustomSelect = ({ value, onChange }: SelectProps) => {
@@ -14,8 +15,8 @@ export const CustomSelect = ({ value, onChange }: SelectProps) => {
     { value: '1.2', label: '20%' },
   ];
 
-  const handleSelect = (newValue: OnChangeValue<SelectOption, boolean>) => {
-    onChange((newValue as SelectOption).value);
+  const handleSelect = (newValue: SelectOption | null) => {
+    newValue?.value && onChange(newValue.value);
   };
 
   const getOptionValue = (value: string): SelectOption | undefined => {
