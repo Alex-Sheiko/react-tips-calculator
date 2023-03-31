@@ -1,4 +1,4 @@
-import Select from 'react-select';
+import Select, { OnChangeValue } from 'react-select';
 import { SelectOption } from '../../types/types';
 import { customStyles } from './styles';
 
@@ -9,13 +9,13 @@ interface SelectProps {
 
 export const CustomSelect = ({ value, onChange }: SelectProps) => {
   const options: SelectOption[] = [
-    { value: '10', label: '10%' },
-    { value: '15', label: '15%' },
-    { value: '20', label: '20%' },
+    { value: '1.1', label: '10%' },
+    { value: '1.15', label: '15%' },
+    { value: '1.2', label: '20%' },
   ];
 
-  const handleSelect = (newValue: SelectOption | null) => {
-    newValue?.value && onChange(newValue.value);
+  const handleSelect = (newValue: OnChangeValue<SelectOption, boolean>) => {
+    onChange((newValue as SelectOption).value);
   };
 
   const getOptionValue = (value: string): SelectOption | undefined => {
