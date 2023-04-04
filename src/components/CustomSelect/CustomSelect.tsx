@@ -1,27 +1,30 @@
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
 import { SelectOption } from '../../types/types';
 import { customStyles } from './styles';
 
-interface SelectProps {
-  value: string;
-  onChange: (value: string) => void;
+interface CustomSelectProps {
+  currentOption: SelectOption;
+  setTips: (value: SelectOption) => void;
   options: SelectOption[];
 }
 
-export const CustomSelect = ({ value, onChange, options }: SelectProps) => {
-  const handleSelect = (newValue: SelectOption | null) => {
-    newValue?.value && onChange(newValue.value);
+export const CustomSelect = ({
+  options,
+  setTips,
+  currentOption,
+}: CustomSelectProps) => {
+  const handleChange = (option: SingleValue<typeof currentOption>) => {
+    if (option) setTips(option);
   };
-
-  const getOptionValue = (value: string): SelectOption | undefined =>
-    value ? options.find((option) => option.value === value) : undefined;
 
   return (
     <Select
-      styles={customStyles}
       options={options}
-      value={getOptionValue(value)}
-      onChange={handleSelect}
+      isMulti={false}
+      styles={customStyles}
+      isSearchable={false}
+      value={currentOption}
+      onChange={handleChange}
     />
   );
 };

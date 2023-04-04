@@ -6,30 +6,36 @@ import { CustomSelect } from '../CustomSelect/CustomSelect';
 import { useInput } from '../../hooks/useInput';
 import { SelectOption } from '../../types/types';
 
-interface FormProps {
-  options: SelectOption[];
-}
+const options: SelectOption[] = [
+  { value: 10, label: '10%' },
+  { value: 15, label: '15%' },
+  { value: 20, label: '20%' },
+];
 
-export const Form = ({ options }: FormProps) => {
+export const Form = () => {
   const bill = useInput();
   const persons = useInput();
-  const [total, setTotal] = useState('0');
-  const [tips, setTips] = useState('1.1');
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [tips, setTips] = useState<SelectOption>(options[0]);
+  const [isDisabled, setisDisabled] = useState(true);
+  const [total, setTotal] = useState(0);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const billAmount = parseFloat(bill.value),
-      personsNumber = parseFloat(persons.value),
-      percentTips = parseFloat(tips),
-      totalBill = ((billAmount * percentTips) / personsNumber).toFixed(2);
-    setTotal(totalBill);
+    if (bill.value && persons.value) {
+      setTotal(
+        (+bill.value + (+bill.value * tips.value) / 100) / +persons.value
+      );
+    }
   };
 
   useEffect(() => {
-    setIsDisabled(!bill.value || !persons.value);
-  }, [bill, persons]);
+    if (bill.value && persons.value) {
+      setisDisabled(false);
+    } else {
+      setisDisabled(true);
+    }
+  }, [bill.value, persons.value]);
 
   return (
     <StyledForm onSubmit={handleSubmit}>
@@ -38,10 +44,16 @@ export const Form = ({ options }: FormProps) => {
       <FormControls>
         <Input {...bill} type="number" placeholder="Enter bill" />
         <Input {...persons} type="number" placeholder="Enter persons" />
-        <CustomSelect value={tips} onChange={setTips} options={options} />
+        <CustomSelect
+          options={options}
+          setTips={setTips}
+          currentOption={tips}
+        />
       </FormControls>
-      <TotalBill>Total: {total}$</TotalBill>
-      <Button isDisabled={isDisabled} />
+      <TotalBill>Total: {total.toFixed(2)}$</TotalBill>
+      <Button disabled={isDisabled} type="submit">
+        Ohhhoooo 🍻
+      </Button>
     </StyledForm>
   );
 };
